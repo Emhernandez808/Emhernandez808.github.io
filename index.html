@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ethan Hernandez Mechanical Engineer</title>
 <meta name="description" content="Mechanical engineering portfolio of Ethan Hernandez.">
+<link rel="icon" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
@@ -109,6 +110,14 @@ a{color:inherit}
   position:absolute;left:0;right:0;bottom:0;padding:24px clamp(18px,5vw,28px) 16px;
   color:rgba(255,255,255,.9);font-size:13.5px;
 }
+.hero__logo{
+  position:absolute;top:clamp(14px,2.2vw,24px);left:clamp(14px,5vw,26px);
+  height:clamp(48px,5.2vw,68px);width:auto;box-sizing:content-box;
+  padding:10px 13px;border-radius:16px;
+  background:rgba(10,12,14,.42);backdrop-filter:blur(7px);
+  border:1px solid rgba(255,255,255,.14);
+  pointer-events:none;
+}
 
 /* =========================================================================
    3. PROJECTS
@@ -160,16 +169,19 @@ section{padding:0 0 clamp(40px,7vw,72px)}
 /* =========================================================================
    4. ABOUT PAGE
    ========================================================================= */
-.about{display:grid;grid-template-columns:270px 1fr;gap:clamp(22px,4vw,44px);align-items:start}
+.about{display:grid;grid-template-columns:270px 1fr;gap:clamp(22px,4vw,44px);align-items:stretch}
+/* the photo stretches to the height of the text column, so the contact card
+   and the bottom of the photo line up on the same edge */
 .about__photo{
-  aspect-ratio:1/1;border-radius:var(--radius);overflow:hidden;
+  border-radius:var(--radius);overflow:hidden;min-height:270px;
   background:var(--bg-2);border:1px solid var(--line);
 }
 .about__photo img{width:100%;height:100%;object-fit:cover}
+.about__text{display:flex;flex-direction:column}
 .about__text p{font-size:16.5px;color:var(--ink-2);max-width:66ch}
 .about__text p + p{margin-top:16px}
 .contact{
-  margin-top:clamp(26px,3vw,36px);
+  margin-top:clamp(26px,3vw,36px);margin-bottom:0;
   border-left:3px solid var(--salmon);
   background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--salmon);
   border-radius:0 var(--radius) var(--radius) 0;
@@ -179,6 +191,8 @@ section{padding:0 0 clamp(40px,7vw,72px)}
   display:block;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
   color:var(--ink-3);margin-bottom:14px;
 }
+.about__text .contact{margin-top:auto}
+.about__text > div:first-child{margin-bottom:clamp(26px,3vw,36px)}
 .contact ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
 .contact li{display:flex;align-items:baseline;gap:14px}
 .contact__tag{
@@ -214,7 +228,7 @@ section{padding:0 0 clamp(40px,7vw,72px)}
 .exp__what p{font-size:15px;color:var(--ink-2);margin-top:5px;max-width:70ch}
 @media (max-width:760px){
   .about{grid-template-columns:1fr}
-  .about__photo{max-width:220px}
+  .about__photo{max-width:220px;aspect-ratio:1/1;min-height:0}
   .exp__row{grid-template-columns:1fr;gap:4px}
 }
 
@@ -286,6 +300,7 @@ footer a.mail:hover{text-decoration:underline}
     <h2 id="pTitle"></h2>
     <h1 id="pName"></h1>
   </div>
+  <img class="hero__logo" id="heroLogo" alt="">
   <div class="hero__cap" id="slideCap"></div>
 </div>
 
@@ -357,6 +372,7 @@ const SITE = {
 
   name:  "Ethan Hernandez",
   title: "Mechanical Engineer",
+  logo:  "",                    /* mark in the top corner. point at images/logo.png to bring it back */
   email: "808.ethan.hernandez@gmail.com",
 
   /* banner photos. the order is shuffled every time the page loads */
@@ -374,8 +390,9 @@ const SITE = {
     { image: "images/stairs-1.jpg",    caption: "PM2 headbox platform, BioOrigin" },
     { image: "images/trim-1.jpg",      caption: "Trim duct mockups and the finished part" },
     { image: "images/nozzle-1.jpg",    caption: "Glue nozzle bench test stand" },
-    { image: "images/c2c-plumb-3.jpg", caption: "DWV and storm isometric, C2C Engineering" },
-    { image: "images/c2c-hvac-3.jpg",  caption: "Mechanical floor plan, C2C Engineering" }
+    { image: "images/banner-plumb.jpg", caption: "DWV and storm isometric, C2C Engineering" },
+    { image: "images/banner-hvac.jpg",  caption: "Mechanical floor plan, C2C Engineering" },
+    { image: "images/testbox-1.jpg",    caption: "Combat robot test box, built with the team" }
   ],
 
   /* filter tabs */
@@ -425,8 +442,7 @@ const SITE = {
       gallery:["images/benny-drive-1.jpg", "images/benny-drive-2.jpg", "images/benny-1.jpg",
                "images/benny-11.jpg", "images/benny-2.jpg", "images/benny-3.jpg",
                "images/benny-5.jpg", "images/benny-6.jpg", "images/benny-7.jpg",
-               "images/benny-8.jpg", "images/benny-9.jpg", "images/benny-10.jpg",
-               "images/benny-4.jpg"],
+               "images/benny-9.jpg", "images/benny-10.jpg", "images/benny-4.jpg"],
       overview:"Benny is the robot I have put the most into. I own the drivetrain: design, prototyping, and the troubleshooting that comes after a match goes badly. The back wheels are built into the chassis and shielded by metal walls, which is why the drive has never failed us. The weapon is a drum spinner on a hub motor, tuned to spin slower around a smaller area so it wins weapon on weapon engagements instead of losing the trade.",
       points: [
         "Designed, prototyped, and troubleshot the drivetrain, including custom cleats for traction on the arena floor",
@@ -447,7 +463,8 @@ const SITE = {
       summary:"12 pound combat robot with a 9 inch diameter vertical spinner, designed to hit hard.",
       cover:  "images/apollo-1.jpg",
       gallery:["images/apollo-5.jpg", "images/apollo-6.jpg", "images/apollo-7.jpg",
-               "images/apollo-2.jpg", "images/apollo-3.jpg", "images/apollo-4.jpg"],
+               "images/apollo-8.jpg", "images/apollo-2.jpg", "images/apollo-3.jpg",
+               "images/apollo-4.jpg"],
       overview:"Apollo is the hard hitter. The weapon is a 9 inch vertical spinner, sized as large as the class allows to put the most energy into a hit. That much weapon fights back, so the chassis is deliberately wide to keep gyroscopic effects from steering the robot for us.",
       points: [
         "Designed, 3D printed, and manufactured the prototype drivetrain",
@@ -498,6 +515,22 @@ const SITE = {
         "Drove Brickbot at our 1 pound robot competition, and we still use him for driving practice"
       ],
       tools:  ["Fusion 360", "Machining", "3D printing", "Electronics"]
+    },
+    {
+      title:  "Combat Robot Test Box",
+      org:    "Combat Robotics @ Cornell",
+      period: "",
+      role:   "Fabrication Team",
+      cats:   ["Combat Robotics", "Fabrication"],
+      summary:"Welded steel and polycarbonate test box so the team can spin weapons up to full speed without anyone standing in front of them.",
+      cover:  "images/testbox-1.jpg",
+      gallery:["images/testbox-2.jpg"],
+      overview:"Spinning a weapon up in an open shop is how people get hurt. We built a test box out of welded steel framing with polycarbonate panels on the lid and walls, so a robot can be run at full power with everyone safely outside it.",
+      points: [
+        "Cut and welded the steel frame, then ground the welds down",
+        "Fit polycarbonate panels on the lid and sides so the robot stays visible while it runs"
+      ],
+      tools:  ["Welding", "Angle grinder", "Steel fabrication", "Polycarbonate"]
     },
     {
       title:  "Screw Press Inlet Hopper",
@@ -691,6 +724,8 @@ const dot = (a, b) => b ? esc(a) + " &middot; " + esc(b) : esc(a);
 /* landing */
 $("pName").textContent = SITE.name;
 $("pTitle").textContent = SITE.title;
+if(SITE.logo){ $("heroLogo").src = SITE.logo; $("heroLogo").alt = SITE.name; }
+else { $("heroLogo").remove(); }
 $("pMail").textContent = SITE.email;
 $("pMail").href = "mailto:" + SITE.email;
 
