@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ethan Hernandez Mechanical Engineer</title>
+<meta name="description" content="Mechanical engineering portfolio of Ethan Hernandez.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
+
+<!--
+  ===========================================================================
+  ETHAN HERNANDEZ // PORTFOLIO
+  ===========================================================================
+  PHOTOS live in the "images" folder next to this file. Point at them like
+  "images/apollo-1.jpg". Leave a photo field as "" and you get a dashed
+  placeholder box instead.
+
+  EDIT TWO PLACES:
+    1. The ":root" block below  -> colors, fonts, spacing.
+    2. The "SITE" object at the bottom -> banner photos and projects.
+
+  Per project you can set fit: "contain" so the image is never cropped.
+  Good for drawings and for photos shot on a plain background.
+  ===========================================================================
+-->
+
+<style>
+/* =========================================================================
+   1. LOOK AND FEEL
+   ========================================================================= */
+:root{
+  --bg:        #FFFFFF;
+  --bg-2:      #F6F6F4;
+  --ink:       #14161A;
+  --ink-2:     #565D66;
+  --ink-3:     #8A919A;
+  --line:      #E3E4E1;
+  --accent:    #2F5D62;     /* active tab, links */
+  --accent-ink:#FFFFFF;
+  --salmon:    #FA8072;     /* the About me / Projects page button */
+  --salmon-ink:#2B1512;
+
+  --font-head: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --radius: 10px;
+  --maxw:   1080px;
+  --gap:    clamp(16px, 2.4vw, 26px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121315; --bg-2:#1A1C1F; --ink:#ECEDEA; --ink-2:#A9B0B6; --ink-3:#787F86;
+    --line:#2A2D31; --accent:#7FB7AE; --accent-ink:#14161A;
+    --salmon:#FF8A76; --salmon-ink:#2B1512;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121315; --bg-2:#1A1C1F; --ink:#ECEDEA; --ink-2:#A9B0B6; --ink-3:#787F86;
+  --line:#2A2D31; --accent:#7FB7AE; --accent-ink:#14161A;
+  --salmon:#FF8A76; --salmon-ink:#2B1512;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:16.5px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--font-head);margin:0;line-height:1.1;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,5vw,28px)}
+
+/* =========================================================================
+   2. BANNER: name over rotating photos
+   ========================================================================= */
+.hero{
+  position:relative;width:100%;
+  height:clamp(430px,74vh,780px);
+  overflow:hidden;background:#0E1013;
+  margin-bottom:clamp(40px,7vw,72px);
+}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.1s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover}
+.hero .ph{background:#0E1013;border-color:#3C4249}
+.hero__scrim{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.34) 45%, rgba(0,0,0,.66));
+}
+.hero__text{
+  position:absolute;inset:0;display:grid;place-content:center;text-align:center;
+  padding:0 24px;color:#fff;
+}
+.hero__text h2{
+  font-family:var(--font-body);font-weight:600;
+  font-size:clamp(13px,1.6vw,17px);letter-spacing:.16em;text-transform:uppercase;
+  margin-bottom:14px;opacity:.92;
+}
+.hero__text h1{
+  font-size:clamp(44px,8vw,94px);font-weight:700;letter-spacing:-.03em;
+  text-shadow:0 2px 24px rgba(0,0,0,.35);
+}
+.hero__cap{
+  position:absolute;left:0;right:0;bottom:0;padding:24px clamp(18px,5vw,28px) 16px;
+  color:rgba(255,255,255,.9);font-size:13.5px;
+}
+
+/* =========================================================================
+   3. PROJECTS
+   ========================================================================= */
+section{padding:0 0 clamp(40px,7vw,72px)}
+.head{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+.head h2{font-size:clamp(24px,3.4vw,32px);font-weight:700}
+
+.pagebtn{
+  font-family:inherit;font-size:17px;font-weight:500;padding:13px 30px;border-radius:999px;
+  cursor:pointer;background:var(--salmon);border:1px solid var(--salmon);color:var(--salmon-ink);
+  transition:filter .15s ease, transform .15s ease;
+}
+.pagebtn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.tab{
+  font-family:inherit;font-size:14px;padding:8px 15px;border-radius:999px;cursor:pointer;
+  background:transparent;border:1px solid var(--line);color:var(--ink-2);transition:.15s ease;
+}
+.tab:hover{border-color:var(--ink-3);color:var(--ink)}
+.tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--gap)}
+.proj{
+  text-align:left;padding:0;cursor:pointer;font:inherit;color:inherit;
+  background:transparent;border:0;display:flex;flex-direction:column;gap:12px;
+}
+.thumb{
+  aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;
+  background:var(--bg-2);border:1px solid var(--line);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.thumb img{width:100%;height:100%;object-fit:cover}
+/* projects with fit:"contain" show the whole image instead of cropping it */
+.thumb.contain img, .gallery > div.contain img{object-fit:contain}
+.proj:hover .thumb{transform:translateY(-4px);box-shadow:0 12px 26px rgba(20,22,26,.12)}
+.proj h3{font-size:19.5px;font-weight:600}
+.proj .meta{font-size:13.5px;color:var(--ink-3);margin-top:3px}
+.proj .sum{font-size:15px;color:var(--ink-2);margin-top:8px}
+
+/* dashed placeholder shown when a photo is missing */
+.ph{
+  width:100%;height:100%;display:grid;place-items:center;text-align:center;
+  border:1px dashed var(--ink-3);border-radius:inherit;color:var(--ink-3);
+  font-size:12.5px;letter-spacing:.04em;padding:14px;background:var(--bg-2);
+}
+
+/* =========================================================================
+   4. ABOUT PAGE
+   ========================================================================= */
+.about{display:grid;grid-template-columns:270px 1fr;gap:clamp(22px,4vw,44px);align-items:start}
+.about__photo{
+  aspect-ratio:1/1;border-radius:var(--radius);overflow:hidden;
+  background:var(--bg-2);border:1px solid var(--line);
+}
+.about__photo img{width:100%;height:100%;object-fit:cover}
+.about__text p{font-size:16.5px;color:var(--ink-2);max-width:66ch}
+.about__text p + p{margin-top:16px}
+.contact{
+  margin-top:clamp(26px,3vw,36px);
+  border-left:3px solid var(--salmon);
+  background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--salmon);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:20px 24px 22px;max-width:520px;
+}
+.contact__label{
+  display:block;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:14px;
+}
+.contact ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+.contact li{display:flex;align-items:baseline;gap:14px}
+.contact__tag{
+  flex:0 0 74px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+}
+.contact a{
+  font-family:var(--font-head);font-size:clamp(16px,1.9vw,19px);font-weight:600;
+  letter-spacing:-.01em;color:var(--ink);text-decoration:none;
+  border-bottom:1px solid transparent;transition:.15s ease;overflow-wrap:anywhere;
+}
+.contact a:hover{color:var(--salmon);border-bottom-color:var(--salmon)}
+@media (max-width:520px){
+  .contact li{flex-direction:column;gap:2px}
+  .contact__tag{flex:none}
+}
+.blocks h3{
+  font-family:var(--font-body);font-size:12.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);margin:0 0 16px;
+}
+.blocks{margin-top:clamp(32px,5vw,52px)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+.cols ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px}
+.cols li{font-size:15px;color:var(--ink-2)}
+.cols h4{font-family:var(--font-head);font-size:16px;font-weight:600;margin:0 0 8px}
+.exp{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.exp__row{
+  display:grid;grid-template-columns:160px 1fr;gap:18px;
+  padding:16px 0;border-bottom:1px solid var(--line);
+}
+.exp__when{font-size:14px;color:var(--ink-3)}
+.exp__what strong{font-family:var(--font-head);font-size:17px;font-weight:600;display:block}
+.exp__what span{font-size:14px;color:var(--accent)}
+.exp__what p{font-size:15px;color:var(--ink-2);margin-top:5px;max-width:70ch}
+@media (max-width:760px){
+  .about{grid-template-columns:1fr}
+  .about__photo{max-width:220px}
+  .exp__row{grid-template-columns:1fr;gap:4px}
+}
+
+/* =========================================================================
+   5. PROJECT DETAIL
+   ========================================================================= */
+dialog.sheet{
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--bg);color:var(--ink);
+  padding:0;width:min(840px,94vw);max-height:90vh;box-shadow:0 24px 60px rgba(0,0,0,.28);
+}
+dialog.sheet::backdrop{background:rgba(12,14,16,.6)}
+.dlg__bar{
+  position:sticky;top:0;z-index:2;background:var(--bg);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:12px;padding:12px 18px;
+}
+.dlg__bar strong{font-family:var(--font-head);font-size:16px;font-weight:600}
+.dlg__close{
+  margin-left:auto;background:transparent;border:1px solid var(--line);border-radius:999px;
+  color:var(--ink-2);font:inherit;font-size:13px;padding:5px 13px;cursor:pointer;
+}
+.dlg__close:hover{border-color:var(--ink-3);color:var(--ink)}
+.dlg__body{overflow-y:auto;max-height:calc(90vh - 54px);padding:22px 18px 30px}
+.dlg__body h3{font-size:clamp(22px,3.2vw,30px);font-weight:700}
+.dlg__meta{font-size:14px;color:var(--ink-3);margin:8px 0 20px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:22px}
+.gallery > div{aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;background:var(--bg-2);border:1px solid var(--line)}
+.gallery img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.dlg__body h4{
+  font-family:var(--font-body);font-size:12.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);margin:24px 0 8px;
+}
+.dlg__body p.lede{font-size:16px;color:var(--ink-2);max-width:68ch}
+.dlg__body ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:7px;max-width:68ch}
+.dlg__body li{font-size:15.5px;color:var(--ink-2)}
+.pills{display:flex;gap:7px;flex-wrap:wrap}
+.pill{font-size:12.5px;padding:4px 11px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2)}
+
+/* full size photo viewer, sits above the project popup */
+dialog.lightbox{
+  border:0;padding:0;background:transparent;overflow:hidden;
+  width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;
+}
+dialog.lightbox[open]{display:grid;place-items:center}
+dialog.lightbox::backdrop{background:rgba(8,9,11,.93)}
+dialog.lightbox img{
+  max-width:96vw;max-height:92dvh;width:auto;height:auto;object-fit:contain;
+  border-radius:4px;cursor:zoom-out;background:#fff;
+}
+
+/* =========================================================================
+   6. FOOTER
+   ========================================================================= */
+footer{border-top:1px solid var(--line);padding:clamp(28px,5vw,44px) 0}
+footer a.mail{color:var(--accent);text-decoration:none;font-size:17px;font-weight:500}
+footer a.mail:hover{text-decoration:underline}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="hero" id="hero">
+  <div id="slideFrame"></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__text">
+    <h2 id="pTitle"></h2>
+    <h1 id="pName"></h1>
+  </div>
+  <div class="hero__cap" id="slideCap"></div>
+</div>
+
+<main class="wrap">
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="head">
+      <h2>Projects</h2>
+      <button class="pagebtn" type="button" data-go="about">About me</button>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" hidden>
+    <div class="head">
+      <h2>About me</h2>
+      <button class="pagebtn" type="button" data-go="projects">Projects</button>
+    </div>
+    <div class="about">
+      <div class="about__photo" id="aboutPhoto"></div>
+      <div class="about__text">
+        <div id="aboutText"></div>
+        <div class="contact" id="aboutContact"></div>
+      </div>
+    </div>
+    <div class="blocks">
+      <h3>Skills and tools</h3>
+      <div class="cols" id="aboutSkills"></div>
+    </div>
+    <div class="blocks">
+      <h3>Experience</h3>
+      <div class="exp" id="aboutExp"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="mail" id="pMail" href="#"></a>
+  </div>
+</footer>
+
+<dialog class="sheet" id="dlg">
+  <div class="dlg__bar">
+    <strong id="dlgTag"></strong>
+    <button class="dlg__close" id="dlgClose" type="button">Close</button>
+  </div>
+  <div class="dlg__body" id="dlgBody"></div>
+</dialog>
+
+<dialog class="lightbox" id="lb"><img id="lbImg" alt=""></dialog>
+
+<script>
+/* ==========================================================================
+   YOUR CONTENT. Edit anything in here.
+
+   PHOTOS: "images/whatever.jpg". Leave "" and you get a placeholder box.
+   PERIOD: leave "" and no date shows on the card.
+   FIT:    "contain" shows the whole image instead of cropping it.
+   CATEGORIES: the filter tabs. A project shows under a tab when that word
+   is in its "cats" list.
+   ========================================================================== */
+
+const SITE = {
+
+  name:  "Ethan Hernandez",
+  title: "Mechanical Engineer",
+  email: "808.ethan.hernandez@gmail.com",
+
+  /* banner photos. the order is shuffled every time the page loads */
+  banner: [
+    { image: "images/benny-hero.jpg",  caption: "Benny R. Johm, Combat Robotics @ Cornell" },
+    { image: "images/apollo-1.jpg",    caption: "Apollo, 12 lb vertical spinner" },
+    { image: "images/apollo-5.jpg",    caption: "Apollo drivetrain on the bench" },
+    { image: "images/beater-9.jpg",    caption: "Beater B Barker" },
+    { image: "images/beater-3.jpg",    caption: "Turning the brass flywheel for Beater B Barker" },
+    { image: "images/beater-8.jpg",    caption: "Beater B Barker in the arena" },
+    { image: "images/brickbot-1.jpg",  caption: "Brickbot" },
+    { image: "images/brickbot-4.jpg",  caption: "Brickbot internals and wiring" },
+    { image: "images/inlet-1.jpg",     caption: "Screw press inlet hopper, fabricated" },
+    { image: "images/inlet-2.jpg",     caption: "Where the hopper lands on the primary press" },
+    { image: "images/stairs-1.jpg",    caption: "PM2 headbox platform, BioOrigin" },
+    { image: "images/trim-1.jpg",      caption: "Trim duct mockups and the finished part" },
+    { image: "images/nozzle-1.jpg",    caption: "Glue nozzle bench test stand" },
+    { image: "images/c2c-plumb-3.jpg", caption: "DWV and storm isometric, C2C Engineering" },
+    { image: "images/c2c-hvac-3.jpg",  caption: "Mechanical floor plan, C2C Engineering" }
+  ],
+
+  /* filter tabs */
+  categories: ["CAD", "Combat Robotics", "Fabrication"],
+
+  /* the About me page */
+  about: {
+    photo: "images/ethan.jpg",
+    paragraphs: [
+      "I am a mechanical engineering student at Cornell, originally from Stockton, California. Most of what I know came from building something, breaking it, and fixing it. Combat robots, engineering drafting, paper mill part design, renovation work on family rental properties, and projects that did not survive their first test."
+    ],
+    contact: {
+      label: "Reach me here",
+      rows: [
+        { tag: "Email",    text: "808.ethan.hernandez@gmail.com", href: "mailto:808.ethan.hernandez@gmail.com" },
+        { tag: "Phone",    text: "209.621.4785",                  href: "tel:+12096214785" },
+        { tag: "LinkedIn", text: "ethan-hernandez-a431a1282",     href: "https://www.linkedin.com/in/ethan-hernandez-a431a1282" }
+      ]
+    },
+    skills: [
+      { group: "Design and CAD",     items: ["Autodesk Fusion 360", "AutoCAD", "FEA simulation", "Trace3D Plus"] },
+      { group: "Fabrication",        items: ["Lathe and mill work", "3D printing", "Urethane casting", "Soldering", "Sheet metal"] },
+      { group: "Analysis and code",  items: ["Python", "MATLAB", "Excel modeling", "Design of experiments"] },
+      { group: "Mechanical systems", items: ["HVAC fundamentals", "Thermal systems", "Plumbing and fire protection", "Combat robotics"] }
+    ],
+    experience: [
+      { when:"2024 to Present", role:"Mechanical Engineering Intern", org:"C2C Engineering", note:"Mechanical, plumbing, and fire protection design in AutoCAD with Trace3D Plus load calculations and field site visits." },
+      { when:"2026",            role:"Engineering Intern", org:"BioOrigin Specialty Products", note:"Paper machine equipment design: hoppers, platforms, stairs, ductwork, and the glue nozzle study." },
+      { when:"2023 to Present", role:"Project Lead and Trainer", org:"Combat Robotics @ Cornell", note:"Drivetrain and weapon design, driving in competition, and training new members." },
+      { when:"2025 to Present", role:"Experiential Learning Lab Lead", org:"Engineering Project Teams Operations", note:"Leading a 4 person team through the renovation of the shared makerspace." },
+      { when:"2024 to 2025",    role:"Research Assistant", org:"Lehmann Lab, Cornell", note:"Thermal modeling and jacketed auger redesign for a manure to biochar pyrolysis system." },
+      { when:"2024 to Present", role:"Farm Trip Co Guide", org:"Outdoor Odyssey, Cornell", note:"Leading 6 day wilderness expeditions for incoming students. Certified Wilderness First Responder." },
+      { when:"2020 to 2023",    role:"Squadron Cadet Commander", org:"Civil Air Patrol, U.S. Air Force Auxiliary", note:"Led weekly meetings for 15 cadets, built training curriculum, and mentored new cadets." }
+    ]
+  },
+
+  projects: [
+    {
+      title:  "Benny R. Johm",
+      org:    "Combat Robotics @ Cornell",
+      period: "",
+      role:   "Drivetrain Design and Driver",
+      cats:   ["Combat Robotics", "CAD", "Fabrication"],
+      fit:    "contain",
+      summary:"My son. I have piloted this 12 pound combat robot through 3 competitions, and I will keep piloting until we win.",
+      cover:  "images/benny-cut.png",
+      gallery:["images/benny-drive-1.jpg", "images/benny-drive-2.jpg", "images/benny-1.jpg",
+               "images/benny-11.jpg", "images/benny-2.jpg", "images/benny-3.jpg",
+               "images/benny-5.jpg", "images/benny-6.jpg", "images/benny-7.jpg",
+               "images/benny-8.jpg", "images/benny-9.jpg", "images/benny-10.jpg",
+               "images/benny-4.jpg"],
+      overview:"Benny is the robot I have put the most into. I own the drivetrain: design, prototyping, and the troubleshooting that comes after a match goes badly. The back wheels are built into the chassis and shielded by metal walls, which is why the drive has never failed us. The weapon is a drum spinner on a hub motor, tuned to spin slower around a smaller area so it wins weapon on weapon engagements instead of losing the trade.",
+      points: [
+        "Designed, prototyped, and troubleshot the drivetrain, including custom cleats for traction on the arena floor",
+        "3D printed drivetrain components and cast urethane treads in house",
+        "100 percent drivetrain reliability, since the back wheels sit inside the chassis behind metal walls",
+        "Weapon is a drum spinner on a hub motor with a 137 mph tip speed, spinning slower around a smaller area to win weapon on weapon hits",
+        "After the weapon broke, ran FEA to redesign it with better geometry and a different steel, and had it back for the next competition",
+        "Helped with general assembly, maintenance, and soldering, and drove the robot in all 3 competitions"
+      ],
+      tools:  ["Fusion 360", "FEA", "3D printing", "Urethane casting", "Machining"]
+    },
+    {
+      title:  "Apollo",
+      org:    "Combat Robotics @ Cornell",
+      period: "",
+      role:   "Mechanical Team",
+      cats:   ["Combat Robotics", "CAD", "Fabrication"],
+      summary:"12 pound combat robot with a 9 inch diameter vertical spinner, designed to hit hard.",
+      cover:  "images/apollo-1.jpg",
+      gallery:["images/apollo-5.jpg", "images/apollo-6.jpg", "images/apollo-7.jpg",
+               "images/apollo-2.jpg", "images/apollo-3.jpg", "images/apollo-4.jpg"],
+      overview:"Apollo is the hard hitter. The weapon is a 9 inch vertical spinner, sized as large as the class allows to put the most energy into a hit. That much weapon fights back, so the chassis is deliberately wide to keep gyroscopic effects from steering the robot for us.",
+      points: [
+        "Designed, 3D printed, and manufactured the prototype drivetrain",
+        "Made the frame wide on purpose to mitigate gyroscopic effects from a very powerful weapon",
+        "Weapon is 9 inches in diameter to maximize energy, with a top tip speed of 353 mph",
+        "Milled the front plate and other parts",
+        "Helped solder the electronics"
+      ],
+      tools:  ["Fusion 360", "3D printing", "Milling", "Soldering"]
+    },
+    {
+      title:  "Beater B Barker",
+      org:    "Combat Robotics @ Cornell",
+      period: "",
+      role:   "Mechanical Team",
+      cats:   ["Combat Robotics", "CAD", "Fabrication"],
+      summary:"12 pound combat robot with a flywheel inside the weapon to mitigate gyroscopic effects.",
+      cover:  "images/beater-9.jpg",
+      gallery:["images/beater-1.jpg", "images/beater-8.jpg", "images/beater-4.jpg",
+               "images/beater-2.jpg", "images/beater-3.jpg", "images/beater-5.jpg",
+               "images/beater-6.jpg", "images/beater-7.jpg"],
+      overview:"Beater B Barker is where I learned drivetrains. It was the first one I designed end to end, through manufacturing and prototyping, with indirect drive on both wheels. The interesting part is the weapon: a counter spinning brass flywheel sits inside it, so the angular momentum cancels instead of trying to roll the robot over.",
+      points: [
+        "First drivetrain I designed, carried through manufacturing and prototyping, with indirect drive on both wheels",
+        "Counter spinning flywheel inside the weapon to cancel gyroscopic effects",
+        "Machined parts for the robot including the brass flywheel",
+        "Designed a 3D printed weapon lock to meet competition safety rules",
+        "Soldered electronics, and repaired the robot between matches at competition"
+      ],
+      tools:  ["Fusion 360", "Lathe work", "Machining", "3D printing", "Soldering"]
+    },
+    {
+      title:  "Brickbot",
+      org:    "Combat Robotics @ Cornell",
+      period: "",
+      role:   "Team Lead",
+      cats:   ["Combat Robotics", "CAD", "Fabrication"],
+      summary:"12 pound robot built for driving practice, designed to be configurable, durable, and maneuverable.",
+      cover:  "images/brickbot-1.jpg",
+      gallery:["images/brickbot-4.jpg", "images/brickbot-6.jpg", "images/brickbot-2.jpg",
+               "images/brickbot-3.jpg", "images/brickbot-5.jpg"],
+      overview:"Brickbot exists so people can learn to drive without risking a competition robot. That set the whole design: durable enough to take abuse, maneuverable enough to be worth practicing on, and configurable enough to bolt on whatever front end we want to try. The front and back plates are drilled with a grid of holes so wedges, wedgelets, and other attachments can move around.",
+      points: [
+        "Led the team on timeline, agenda, and task allocation",
+        "Designed, specced, and manufactured the drivetrain",
+        "Machined front and back plates with a grid of holes for different configurations",
+        "Packed and specced the electronics",
+        "Drove Brickbot at our 1 pound robot competition, and we still use him for driving practice"
+      ],
+      tools:  ["Fusion 360", "Machining", "3D printing", "Electronics"]
+    },
+    {
+      title:  "Screw Press Inlet Hopper",
+      org:    "BioOrigin Specialty Products",
+      period: "",
+      role:   "Engineering Intern",
+      cats:   ["CAD", "Fabrication"],
+      summary:"Stainless steel inlet hopper for the screw press.",
+      cover:  "images/inlet-1.jpg",
+      gallery:["images/inlet-3.jpg", "images/inlet-2.jpg"],
+      overview:"The screw press on the primary press needed a new inlet hopper to feed stock cleanly into the screw. I measured the existing installation and drew a conical hopper with a base plate matched to the bolt pattern already in place, so the shop could build it and drop it in without touching the machine.",
+      points: [
+        "Measured the existing installation and matched the new base plate to the bolt pattern already there",
+        "Drew top down, front, and side views with full dimensions for the fabrication shop",
+        "Followed the part through fabrication and checked the fit against the machine"
+      ],
+      tools:  ["AutoCAD", "Field measurement", "Sheet metal fabrication"]
+    },
+    {
+      title:  "Beloit Winder Trim Sucker",
+      org:    "BioOrigin Specialty Products",
+      period: "",
+      role:   "Engineering Intern",
+      cats:   ["CAD", "Fabrication"],
+      summary:"Sheet metal trim duct for the Beloit winder.",
+      cover:  "images/trim-1.jpg",
+      gallery:["images/trim-2.jpg", "images/trim-4.jpg", "images/trim-3.jpg"],
+      overview:"The Beloit winder needed a trim sucker to pull edge trim off the sheet. Rather than guess at the geometry, I built cardboard mockups and test fit them on the machine until the angles and clearances worked, then turned the shape that fit into a drawing for the fab shop.",
+      points: [
+        "Built cardboard mockups and test fit them on the winder to settle the geometry",
+        "Drew the final part in 22 gauge mild steel with a 45 degree bend and a transition to 4 inch tubing",
+        "Delivered top down, front, side, and isometric views for fabrication"
+      ],
+      tools:  ["AutoCAD", "Cardboard prototyping", "Sheet metal"]
+    },
+    {
+      title:  "Glue Nozzle Characterization Study",
+      org:    "BioOrigin Specialty Products",
+      period: "",
+      role:   "Engineering Intern",
+      cats:   ["Fabrication"],
+      summary:"Bench study that traced the mill's biggest quality problem to a glue nozzle orifice about five times larger than the job needs.",
+      cover:  "images/nozzle-2.jpg",
+      gallery:["images/nozzle-3.jpg", "images/gn-rig-1.jpg", "images/gn-rig-2.jpg",
+               "images/gn-rig-3.jpg", "images/gn-rig-4.jpg", "images/gn-pattern-1.jpg",
+               "images/gn-pattern-2.jpg", "images/gn-pattern-3.jpg", "images/gn-chart-1.jpg",
+               "images/gn-chart-2.jpg", "images/gn-chart-3.jpg", "images/gn-chart-4.jpg",
+               "images/gn-hmi-1.jpg", "images/nozzle-1.jpg"],
+      overview:"Ply bonding was the number one quality issue in the mill: 65 complaints and 272 thousand dollars through July 2026. I built a bench rig to characterize the Beloit winder glue nozzles off the machine, ran three phases of testing across 0.010, 0.020, and 0.035 orifices, and wrote the report. The answer was orifice size. The 0.035 currently on the machine has to run at 1.4 to 2.1 psi to meet demand, and at that pressure a 1 psi regulator drift moves coat weight by 39 to 53 percent.",
+      points: [
+        "Built the bench rig: Spraymation applicator on a stand, heated glue canister, portable compressor, and separate regulators for fluid, atomization, and fan air",
+        "Ran three phases across three orifice sizes, measuring pattern length, height, area, and flow at every condition, with flow weighed in triplicate",
+        "Separated the variables: distance sets pattern size, atomization air sets pattern shape, fluid pressure sets glue volume",
+        "Showed the 0.035 delivers about five times the 0.020 at every pressure, with operating ranges that do not overlap at all",
+        "Recommended swapping to the 0.020 orifice, which meets the same duty at 10 to 14 psi and gives five times better drift resistance",
+        "Flagged the diverting valve, which commanded 27.8 percent to the bottom boom while the meters read 57.6 percent at the same instant"
+      ],
+      tools:  ["Design of experiments", "Excel", "Pneumatics", "Bench testing", "Technical writing"]
+    },
+    {
+      title:  "Headbox to Stuffbox Elevated Stairs",
+      org:    "BioOrigin Specialty Products",
+      period: "",
+      role:   "Engineering Intern",
+      cats:   ["CAD"],
+      summary:"Stair design that ties into the existing PM2 headbox platform and gives operators a real route to the stuffbox.",
+      cover:  "images/stairs-1.jpg",
+      gallery:["images/stairs-2.jpg", "images/stairs-3.jpg"],
+      overview:"Operators needed a proper way between the PM2 headbox platform and the stuffbox. I drew a stair that ties into the existing handrail and C channel, rests on the headbox platform without being fastened to it, and fits the rise and run the space actually allowed.",
+      points: [
+        "Laid out rise, run, and clearances to fit between the two existing platforms",
+        "Detailed mounting plates, side rails, and the tie in to the existing rail and C channel",
+        "Wrote the bill of materials and the finish spec: primed grey, painted safety yellow"
+      ],
+      tools:  ["AutoCAD", "Field measurement", "Structural detailing"]
+    },
+    {
+      title:  "Paper Machine Standing Platform",
+      org:    "BioOrigin Specialty Products",
+      period: "",
+      role:   "Engineering Intern",
+      cats:   ["CAD"],
+      fit:    "contain",
+      summary:"Wet end standing platform built from support columns, L channel, and fiberglass grating.",
+      cover:  "images/platform-2.jpg",
+      gallery:["images/platform-1.jpg"],
+      overview:"A platform for operators to stand on at the wet end of the paper machine. I sized the support columns and the channel frame, specified fiberglass grating for the deck, and detailed base plates and welds so the mill crew could build it in house.",
+      points: [
+        "Sized support columns, base plates, and the L channel frame carrying the deck",
+        "Specified 1 inch fiberglass grating and detailed how it seats in the frame",
+        "Produced dimensioned views, an isometric, and a full bill of materials"
+      ],
+      tools:  ["AutoCAD", "Structural detailing"]
+    },
+    {
+      title:  "Plumbing Drawings",
+      org:    "C2C Engineering",
+      period: "",
+      role:   "Mechanical Engineering Intern",
+      cats:   ["CAD"],
+      fit:    "contain",
+      summary:"Plumbing plans and isometrics for real building projects, drawn in AutoCAD and taken through permit review.",
+      cover:  "images/c2c-plumb-3.jpg",
+      gallery:["images/c2c-plumb-1.jpg", "images/c2c-plumb-2.jpg", "images/c2c-plumb-4.jpg"],
+      overview:"I draft the plumbing side of building projects at C2C: demo and install floor plans, DWV and storm isometrics, and the details that go with them. The drawings have to survive permit review, so a good part of the work is answering comments and fixing what the reviewer catches.",
+      points: [
+        "Draft plumbing demo and install plans in AutoCAD",
+        "Produce DWV and storm drainage isometrics",
+        "Prepare permit documentation and respond to review comments",
+        "Keep fixture and equipment schedules consistent with the rest of the set"
+      ],
+      tools:  ["AutoCAD", "Plumbing isometrics", "Permit documentation"]
+    },
+    {
+      title:  "HVAC Drawings",
+      org:    "C2C Engineering",
+      period: "",
+      role:   "Mechanical Engineering Intern",
+      cats:   ["CAD"],
+      fit:    "contain",
+      summary:"Mechanical sheets for HVAC systems: equipment layout, ductwork, and the schedules that go with them.",
+      cover:  "images/c2c-hvac-3.jpg",
+      gallery:["images/c2c-hvac-1.jpg", "images/c2c-hvac-2.jpg"],
+      overview:"Mechanical sheets for building projects: placing equipment, running duct through the space that is actually available, and keeping schedules consistent with what the load calculations call for. Site visits are part of it, since the building rarely matches the drawing exactly.",
+      points: [
+        "Draft mechanical plans, equipment floor plans, and ductwork layouts in AutoCAD",
+        "Build and correct equipment schedules",
+        "Join site visits to gather field data and check existing conditions"
+      ],
+      tools:  ["AutoCAD", "Ductwork layout", "Fire protection plans"]
+    },
+    {
+      title:  "Heat Load Calculations",
+      org:    "C2C Engineering",
+      period: "",
+      role:   "Mechanical Engineering Intern",
+      cats:   [],
+      fit:    "contain",
+      summary:"Building load models in Trace3D Plus that decide what equipment ends up on the drawings.",
+      cover:  "images/c2c-load-1.jpg",
+      gallery:["images/c2c-load-2.jpg", "images/c2c-load-3.jpg"],
+      overview:"Before equipment gets picked, the building gets modeled. I take off the floor plan, build the envelope, zoning, and internal loads in Trace3D Plus, run heating and cooling loads, and hand the numbers to the drawings so the equipment is sized for what the building actually does.",
+      points: [
+        "Mark up floor plans and take off areas for the load model",
+        "Model building envelope, zoning, and internal loads in Trace3D Plus",
+        "Run heating and cooling load calculations to size equipment",
+        "Feed the results into equipment selection and schedules"
+      ],
+      tools:  ["Trace3D Plus", "AutoCAD", "HVAC load analysis"]
+    }
+
+    /* ---- COPY THIS TO ADD A PROJECT ----
+    ,{
+      title:  "Project name",
+      org:    "Class, team, or company",
+      period: "",
+      role:   "What you were",
+      cats:   ["CAD"],
+      summary:"One line for the card.",
+      cover:  "images/new-cover.jpg",
+      gallery:["images/new-1.jpg", "images/new-2.jpg"],
+      overview:"A paragraph for the detail popup.",
+      points: ["What you did", "What you did"],
+      tools:  ["Tool", "Tool"]
+    }
+    ------------------------------------- */
+  ]
+};
+
+/* ==========================================================================
+   Rendering. No need to edit past here.
+   ========================================================================== */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* an <img> that swaps to a dashed placeholder if the file is not there yet */
+function pic(src, alt, note){
+  const n = (note === undefined || note === null) ? "Photo goes here" : note;
+  if(!src) return `<div class="ph">${esc(n)}</div>`;
+  return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" data-ph="${esc(n)}" onerror="phFail(this)">`;
+}
+window.phFail = function(img){
+  const d = document.createElement("div");
+  d.className = "ph";
+  const t = img.getAttribute("data-ph");
+  d.textContent = (t === null) ? "Photo goes here" : t;
+  img.replaceWith(d);
+};
+const dot = (a, b) => b ? esc(a) + " &middot; " + esc(b) : esc(a);
+
+/* landing */
+$("pName").textContent = SITE.name;
+$("pTitle").textContent = SITE.title;
+$("pMail").textContent = SITE.email;
+$("pMail").href = "mailto:" + SITE.email;
+
+/* banner: shuffle the photos, then cycle them */
+const S = (SITE.banner || []).slice();
+for(let i = S.length - 1; i > 0; i--){
+  const j = Math.floor(Math.random() * (i + 1));
+  [S[i], S[j]] = [S[j], S[i]];
+}
+let si = 0, timer = null;
+$("slideFrame").innerHTML = S.map((s,i) =>
+  `<div class="slide${i===0?" on":""}">${pic(s.image, s.caption, "")}</div>`
+).join("");
+
+function show(n){
+  if(!S.length) return;
+  si = (n + S.length) % S.length;
+  [...$("slideFrame").children].forEach((el,i) => el.classList.toggle("on", i===si));
+  $("slideCap").textContent = S[si].caption || "";
+}
+function play(){ stop(); timer = setInterval(() => show(si+1), 5500); }
+function stop(){ if(timer) clearInterval(timer); timer = null; }
+show(0);
+if(S.length > 1 && !matchMedia("(prefers-reduced-motion: reduce)").matches) play();
+
+/* tabs */
+let active = "All";
+$("tabs").innerHTML = ["All", ...SITE.categories].map(c =>
+  `<button class="tab" type="button" data-c="${esc(c)}" aria-pressed="${c==="All"}">${esc(c)}</button>`).join("");
+$("tabs").onclick = (e) => {
+  const b = e.target.closest(".tab"); if(!b) return;
+  active = b.dataset.c;
+  [...$("tabs").children].forEach(t => t.setAttribute("aria-pressed", t===b));
+  draw();
+};
+
+/* project cards */
+function draw(){
+  const list = SITE.projects.filter(p => active === "All" || (p.cats || []).includes(active));
+  $("grid").innerHTML = list.map(p => `
+    <button class="proj" type="button" data-i="${SITE.projects.indexOf(p)}">
+      <div class="thumb${p.fit === "contain" ? " contain" : ""}">${pic(p.cover, p.title, "Cover photo")}</div>
+      <div>
+        <h3>${esc(p.title)}</h3>
+        <div class="meta">${dot(p.org, p.period)}</div>
+        <p class="sum">${esc(p.summary)}</p>
+      </div>
+    </button>`).join("") || `<p style="color:var(--ink-3)">Nothing filed under ${esc(active)} yet.</p>`;
+}
+draw();
+
+/* about page */
+const A = SITE.about || {};
+$("aboutPhoto").innerHTML = pic(A.photo, SITE.name, "Your photo");
+$("aboutText").innerHTML = (A.paragraphs || []).map(t => `<p>${esc(t)}</p>`).join("");
+const C = A.contact;
+$("aboutContact").innerHTML = !C ? "" : `
+  <span class="contact__label">${esc(C.label || "Reach me here")}</span>
+  <ul>${(C.rows || []).map(r => `
+    <li><span class="contact__tag">${esc(r.tag)}</span><a href="${esc(r.href)}"${
+      r.href.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${esc(r.text)}</a></li>`).join("")}
+  </ul>`;
+$("aboutSkills").innerHTML = (A.skills || []).map(s =>
+  `<div><h4>${esc(s.group)}</h4><ul>${s.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul></div>`).join("");
+$("aboutExp").innerHTML = (A.experience || []).map(e => `
+  <div class="exp__row">
+    <div class="exp__when">${esc(e.when)}</div>
+    <div class="exp__what">
+      <strong>${esc(e.role)}</strong>
+      <span>${esc(e.org)}</span>
+      <p>${esc(e.note)}</p>
+    </div>
+  </div>`).join("");
+
+/* page switching between Projects and About me */
+function openPage(name){
+  const onAbout = name === "about";
+  $("projects").hidden = onAbout;
+  $("about").hidden = !onAbout;
+  const top = document.querySelector("main").offsetTop - 20;
+  if(window.scrollY > top) window.scrollTo({top: top});
+}
+document.querySelector("main").addEventListener("click", (e) => {
+  const b = e.target.closest(".pagebtn"); if(!b) return;
+  openPage(b.dataset.go);
+  try { history.replaceState(null, "", b.dataset.go === "about" ? "#about" : "#"); } catch(_) {}
+});
+addEventListener("hashchange", () => openPage(location.hash === "#about" ? "about" : "projects"));
+openPage(location.hash === "#about" ? "about" : "projects");
+
+/* detail popup */
+const dlg = $("dlg");
+$("grid").onclick = (e) => {
+  const b = e.target.closest(".proj"); if(!b) return;
+  const p = SITE.projects[+b.dataset.i];
+  const shots = [p.cover, ...(p.gallery || [])].filter(Boolean);
+  const fit = p.fit === "contain" ? "contain" : "";
+  $("dlgTag").textContent = p.org;
+  $("dlgBody").innerHTML = `
+    <h3>${esc(p.title)}</h3>
+    <div class="dlg__meta">${dot(p.role, p.period)}</div>
+    ${shots.length ? `<div class="gallery">${shots.map(src =>
+      `<div class="${fit}">${pic(src, p.title, "Photo goes here")}</div>`).join("")}</div>` : ""}
+    <p class="lede">${esc(p.overview)}</p>
+    <h4>What I did</h4>
+    <ul>${(p.points || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+    <h4>Tools</h4>
+    <div class="pills">${(p.tools || []).map(t => `<span class="pill">${esc(t)}</span>`).join("")}</div>`;
+  dlg.showModal();
+};
+$("dlgClose").onclick = () => dlg.close();
+dlg.addEventListener("click", (e) => { if(e.target === dlg) dlg.close(); });
+
+/* click a gallery photo to see it full size */
+const lb = $("lb");
+$("dlgBody").addEventListener("click", (e) => {
+  const img = e.target.closest(".gallery img"); if(!img) return;
+  $("lbImg").src = img.getAttribute("src");
+  $("lbImg").alt = img.getAttribute("alt") || "";
+  lb.showModal();
+});
+lb.addEventListener("click", () => lb.close());
+lb.addEventListener("close", () => { $("lbImg").src = ""; });
+</script>
+</body>
+</html>
